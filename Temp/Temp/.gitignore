@@ -1,0 +1,19 @@
+# ─── Node ─────────────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+
+# ─── Environment / secrets (NEVER commit these) ────────────────────────────────
+.env
+*.env
+
+# ─── Database files (auto-generated on first run) ──────────────────────────────
+*.db
+*.db-shm
+*.db-wal
+aethernet-store.json
+
+# ─── OS / Editor ──────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp

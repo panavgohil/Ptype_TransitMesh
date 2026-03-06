@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AetherNet | Resilient Mesh</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Mobile Device Frame -->
+    <div class="device-frame">
+        <div class="device-notch"></div>
+        <div class="app-container">
+            <!-- Splash Screen (Loop 3) -->
+            <div class="splash-screen" id="splash-screen">
+                <div class="splash-logo">
+                    <i class="fa-solid fa-tower-broadcast text-primary"
+                        style="font-size: 48px; margin-bottom: 15px;"></i>
+                    <h2>AetherNet</h2>
+                    <p>Secured by Device Biometrics</p>
+                </div>
+
+                <div class="pin-entry">
+                    <div class="pin-dots">
+                        <span class="pin-dot"></span>
+                        <span class="pin-dot"></span>
+                        <span class="pin-dot"></span>
+                        <span class="pin-dot"></span>
+                    </div>
+                    <button class="fingerprint-btn" id="biometric-unlock-btn">
+                        <i class="fa-solid fa-fingerprint"></i>
+                    </button>
+                    <p class="auth-hint">Touch sensor or enter PIN</p>
+                </div>
+            </div>
+
+            <!-- Header -->
+            <header class="app-header">
+                <div class="header-left">
+                    <button class="icon-btn header-menu-btn" id="open-menu-btn"><i
+                            class="fa-solid fa-bars"></i></button>
+                    <div>
+                        <h1 class="app-title">AetherNet</h1>
+                        <p class="app-subtitle">Resilient Node Network</p>
+                    </div>
+                </div>
+                <!-- Top Right Avatar -->
+                <div class="user-avatar" id="avatar-btn">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=b6e3f4"
+                        alt="User Profile">
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <div class="tabs-container">
+                <!-- ============================ 
+                     TAB 1: HOME (Dashboard)
+                     ============================ -->
+                <main class="app-main tab-content active" id="tab-home">
+                    <!-- Network Status Card -->
+                    <section class="network-status-card glass-panel" style="margin-bottom: 25px; padding: 25px;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                            <div class="status-indicator"></div>
+                            <i class="fa-solid fa-satellite-dish"
+                                style="color: var(--primary-color); font-size: 24px;"></i>
+                        </div>
+                        <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 8px;">Network Status</h2>
+                        <div id="network-status" style="color: var(--emerald); font-weight: 600; margin-bottom: 10px;">
+                            Echoing Protocol Active</div>
+                        <p class="status-desc" style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">
+                            Foreground Service active. Silently discovering nearby peers over low-power Bluetooth
+                            connection.</p>
+                    </section>
+
+                    <!-- Stats Section -->
+                    <section class="glass-panel stats-section">
+                        <div class="stat-box">
+                            <i class="fa-solid fa-nfc-symbol"></i>
+                            <div class="stat-value">8</div>
+                            <div class="stat-label">Active Peers</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-box">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <div class="stat-value" id="buffered-msgs">24</div>
+                            <div class="stat-label">Encrypted Packets</div>
+                        </div>
+                    </section>
+
+                    <!-- Action Section -->
+                    <section class="action-section">
+                        <button class="primary-btn" onclick="simulateSync()">
+                            <i class="fa-solid fa-arrow-right-arrow-left"></i> Force Handshake
+                        </button>
+                    </section>
+
+                    <!-- Activity Feed -->
+                    <section class="glass-panel activity-section">
+                        <div class="section-header">
+                            <h2 class="section-title">Cryptographic Ledger</h2>
+                            <span class="live-badge">Live</span>
+                        </div>
+                        <ul class="activity-list" id="activity-list">
+                            <!-- JS Items -->
+                        </ul>
+                    </section>
+                </main>
+
+                <!-- ============================ 
+                     TAB 2: SECURE COMMS (Chat)
+                     ============================ -->
+                <main class="app-main tab-content" id="tab-chat">
+                    <h2 class="page-heading">Secure Channels</h2>
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Search encrypted node names...">
+                    </div>
+
+                    <div class="chat-list">
+                        <div class="chat-item unread">
+                            <div class="chat-avatar bg-gradient-1">EM</div>
+                            <div class="chat-preview">
+                                <div class="chat-header">
+                                    <h4>Emergency Med-Team Alpha</h4>
+                                    <span>10:42 AM</span>
+                                </div>
+                                <p>Supplies secured at sector 4. Do you copy?</p>
+                            </div>
+                            <div class="unread-badge">3</div>
+                        </div>
+
+                        <div class="chat-item">
+                            <div class="chat-avatar bg-gradient-2">FZ</div>
+                            <div class="chat-preview">
+                                <div class="chat-header">
+                                    <h4>Family Zone Group</h4>
+                                    <span>Yesterday</span>
+                                </div>
+                                <p>Everyone made it to the rally point safely.</p>
+                            </div>
+                        </div>
+
+                        <div class="chat-item offline">
+                            <div class="chat-avatar bg-gradient-3">RQ</div>
+                            <div class="chat-preview">
+                                <div class="chat-header">
+                                    <h4>Rescue Operations HQ</h4>
+                                    <span>Tue</span>
+                                </div>
+                                <p>Awaiting internet uplink to sync latest map data.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="floating-action-btn" id="open-compose-btn">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                </main>
+
+                <!-- ============================ 
+                     TAB 3: OFFLINE VAULT (Wallet)
+                     ============================ -->
+                <main class="app-main tab-content" id="tab-wallet">
+                    <h2 class="page-heading">Digital Vault</h2>
+
+                    <div class="credit-card">
+                        <div class="card-top">
+                            <i class="fa-brands fa-nfc-directional text-white text-xl opacity-80"></i>
+                            <div class="chip"></div>
+                        </div>
+                        <div class="card-balance">
+                            <span>Available Offline Balance</span>
+                            <h3>₹ 14,500.00</h3>
+                        </div>
+                        <div class="card-bottom">
+                            <p class="card-number">•••• •••• •••• 9014</p>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/UPI-Logo-vector.svg/1024px-UPI-Logo-vector.svg.png"
+                                alt="UPI" class="upi-logo-card">
+                        </div>
+                    </div>
+
+                    <div class="wallet-actions">
+                        <div class="action-icon-btn" id="open-send-btn">
+                            <div class="icon-circle"><i class="fa-solid fa-arrow-up"></i></div>
+                            <span>Send</span>
+                        </div>
+                        <div class="action-icon-btn">
+                            <div class="icon-circle"><i class="fa-solid fa-arrow-down"></i></div>
+                            <span>Receive</span>
+                        </div>
+                        <div class="action-icon-btn" id="open-qr-btn">
+                            <div class="icon-circle"><i class="fa-solid fa-qrcode"></i></div>
+                            <span>Scan QR</span>
+                        </div>
+                        <div class="action-icon-btn" id="open-history-btn">
+                            <div class="icon-circle"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                            <span>History</span>
+                        </div>
+                    </div>
+
+                    <section class="glass-panel activity-section mt-4">
+                        <div class="section-header">
+                            <h2 class="section-title">Buffered Transactions</h2>
+                            <span class="offline-badge"><i class="fa-solid fa-cloud-arrow-up"></i> Pending Sync</span>
+                        </div>
+                        <ul class="activity-list">
+                            <li class="activity-item">
+                                <div class="activity-icon icon-upi">
+                                    <i class="fa-solid fa-arrow-up"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <div class="activity-title">Sent to Medical Supply Co.</div>
+                                    <div class="activity-time">Awaiting internet node...</div>
+                                </div>
+                                <div class="tx-amount negative">- ₹450</div>
+                            </li>
+                        </ul>
+                    </section>
+                </main>
+
+                <!-- ============================ 
+                     TAB 4: HELP (How it Works)
+                     ============================ -->
+                <main class="app-main tab-content" id="tab-help">
+                    <h2 class="page-heading">Protocol Guide</h2>
+
+                    <div class="help-accordion">
+                        <div class="help-item active">
+                            <div class="help-header">
+                                <div class="help-icon"><i class="fa-solid fa-tower-broadcast text-primary"></i></div>
+                                <h3>How does AetherNet work?</h3>
+                                <i class="fa-solid fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="help-body">
+                                <p>AetherNet is a decentralized mobile communication tool designed to function without
+                                    internet, cellular data, or central routers.</p>
+                                <p>It utilizes a <strong>"Store-and-Forward"</strong> architecture where messages
+                                    physically hop between devices using Android's short-range radio hardware. We call
+                                    this <strong>Epidemic Routing</strong>: when nodes meet, they replicate messages,
+                                    using a Time-to-Live (TTL) limit to prevent storage saturation.</p>
+                            </div>
+                        </div>
+
+                        <div class="help-item">
+                            <div class="help-header">
+                                <div class="help-icon"><i class="fa-solid fa-battery-half text-accent"></i></div>
+                                <h3>Will this drain my battery?</h3>
+                                <i class="fa-solid fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="help-body">
+                                <p><strong>No, thanks to BLE Triggering.</strong> Constant Wi-Fi scanning normally
+                                    drains batteries in under 4 hours.</p>
+                                <p>AetherNet keeps the high-power Wi-Fi Direct radio completely off. Instead, it relies
+                                    on Bluetooth Low Energy (BLE) for peer discovery, waking up the Wi-Fi socket
+                                    connection only when a peer is in range to transfer payloads.</p>
+                            </div>
+                        </div>
+
+                        <div class="help-item">
+                            <div class="help-header">
+                                <div class="help-icon"><i class="fa-solid fa-shield-halved text-purple"></i></div>
+                                <h3>Why run in the background?</h3>
+                                <i class="fa-solid fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="help-body">
+                                <p>Modern operating systems aggressively kill background apps to save memory. AetherNet
+                                    runs as a <strong>Foreground Service</strong>.</p>
+                                <p>This elevates its priority in the Android scheduler, preventing the OS from
+                                    terminating it, ensuring the shadow network remains active even when your phone is
+                                    locked.</p>
+                            </div>
+                        </div>
+
+                        <div class="help-item">
+                            <div class="help-header">
+                                <div class="help-icon"><i class="fa-solid fa-bolt text-emerald"></i></div>
+                                <h3>What about connection delays?</h3>
+                                <i class="fa-solid fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="help-body">
+                                <p>Establishing a Wi-Fi Direct connection can take 10-15 seconds. To prevent failed
+                                    handshakes, we have implemented an <strong>Optimized Handshake</strong> algorithm.
+                                </p>
+                                <p>The app only attempts a connection if the BLE signal strength (RSSI) is stronger than
+                                    <strong>-70dBm</strong>, ensuring devices are physically close enough for a stable,
+                                    high-speed link.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <!-- Bottom Nav -->
+            <nav class="bottom-nav">
+                <div class="nav-item active" data-target="tab-home">
+                    <i class="fa-solid fa-compass"></i>
+                    <span class="nav-label">Radar</span>
+                </div>
+                <div class="nav-item" data-target="tab-chat">
+                    <i class="fa-solid fa-comment-dots"></i>
+                    <span class="nav-label">Comms</span>
+                    <span class="indicator-dot"></span>
+                </div>
+                <div class="nav-item" data-target="tab-wallet">
+                    <i class="fa-solid fa-vault"></i>
+                    <span class="nav-label">Vault</span>
+                </div>
+                <div class="nav-item" data-target="tab-help">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span class="nav-label">Guide</span>
+                </div>
+            </nav>
+
+            <!-- Chat View Overlay -->
+            <div class="chat-view" id="chat-view">
+                <div class="chat-view-header">
+                    <button class="back-btn" id="close-chat-btn"><i class="fa-solid fa-arrow-left"></i></button>
+                    <div class="chat-view-profile">
+                        <div class="chat-avatar bg-gradient-1" id="active-chat-avatar">EM</div>
+                        <div class="chat-view-info">
+                            <h3 id="active-chat-name">Emergency Med-Team Alpha</h3>
+                            <span class="status-online"><span class="dot"></span> Active Peer</span>
+                        </div>
+                    </div>
+                    <button class="icon-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </div>
+
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message-group date-separator"><span>Today</span></div>
+
+                    <div class="message received">
+                        <div class="msg-bubble">
+                            Status update: All units please report.
+                        </div>
+                        <span class="msg-time">10:30 AM</span>
+                    </div>
+
+                    <div class="message sent">
+                        <div class="msg-bubble">
+                            Node 4 online. Moving to sector 7.
+                            <div class="msg-status"><i class="fa-solid fa-check-double text-primary"></i></div>
+                        </div>
+                        <span class="msg-time">10:32 AM</span>
+                    </div>
+
+                    <div class="message received">
+                        <div class="msg-bubble">
+                            Supplies secured at sector 4. Do you copy?
+                        </div>
+                        <span class="msg-time">10:42 AM</span>
+                    </div>
+                </div>
+
+                <div class="chat-input-area">
+                    <button class="attachment-btn"><i class="fa-solid fa-paperclip"></i></button>
+                    <div class="input-wrapper">
+                        <textarea rows="1" placeholder="Encrypted message..." id="chat-input-field"></textarea>
+                    </div>
+                    <button class="send-btn" id="send-msg-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+
+            <!-- Compose Chat Modal -->
+            <div class="modal-overlay" id="compose-modal">
+                <div class="modal-content slide-up">
+                    <div class="modal-drag-handle"></div>
+                    <div class="modal-header">
+                        <h3>New Secure Channel</h3>
+                        <button class="modal-close" id="close-compose-btn"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="modal-subtitle">Select a nearby active peer to initiate an encrypted handshake.</p>
+                        <div class="peer-list">
+                            <div class="peer-item">
+                                <div class="peer-icon"><i class="fa-brands fa-bluetooth text-primary"></i></div>
+                                <div class="peer-info">
+                                    <h4>Node 7A (Strong Signal)</h4>
+                                    <span>Distance: ~4 meters</span>
+                                </div>
+                                <button class="connect-btn">Connect</button>
+                            </div>
+                            <div class="peer-item">
+                                <div class="peer-icon"><i class="fa-brands fa-bluetooth text-primary"></i></div>
+                                <div class="peer-info">
+                                    <h4>Node X2 (Weak Signal)</h4>
+                                    <span>Distance: ~12 meters</span>
+                                </div>
+                                <button class="connect-btn">Connect</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Send Funds Modal (Vault) -->
+    <div class="modal-overlay" id="send-modal">
+        <div class="modal-content slide-up">
+            <div class="modal-drag-handle"></div>
+            <div class="modal-header">
+                <h3>Transfer Offline Funds</h3>
+                <button class="modal-close" id="close-send-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-wrapper mb-3" style="margin-bottom: 15px;">
+                    <input type="text" placeholder="Recipient Node Address" style="padding: 10px;">
+                </div>
+                <div class="input-wrapper mb-3" style="margin-bottom: 25px; border-color: var(--primary-color);">
+                    <span style="color: var(--text-muted); padding-left: 10px;">₹</span>
+                    <input type="number" placeholder="0.00"
+                        style="padding: 10px; font-size: 20px; font-weight: 700; color: var(--primary-color);">
+                </div>
+                <button class="primary-btn w-100" style="width: 100%; border-radius: 12px; font-size: 15px;">Send via
+                    Mesh</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transaction History Modal -->
+    <div class="modal-overlay" id="history-modal">
+        <div class="modal-content slide-up" style="height: 70vh; display: flex; flex-direction: column;">
+            <div class="modal-drag-handle"></div>
+            <div class="modal-header">
+                <h3>Offline Ledger</h3>
+                <button class="modal-close" id="close-history-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body" style="overflow-y: auto; flex: 1;">
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <div class="activity-icon icon-upi"><i class="fa-solid fa-arrow-down"></i></div>
+                        <div class="activity-details">
+                            <div class="activity-title">Received off-mesh</div>
+                            <div class="activity-time">Yesterday · Synced</div>
+                        </div>
+                        <div class="tx-amount text-emerald">+ ₹1,200.00</div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon icon-msg"><i class="fa-solid fa-arrow-up"></i></div>
+                        <div class="activity-details">
+                            <div class="activity-title">Sent to Node 4A</div>
+                            <div class="activity-time">2 days ago · Verified</div>
+                        </div>
+                        <div class="tx-amount negative">- ₹350.00</div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon icon-ble"><i class="fa-solid fa-arrow-down"></i></div>
+                        <div class="activity-details">
+                            <div class="activity-title">Received Point-to-Point</div>
+                            <div class="activity-time">3 days ago</div>
+                        </div>
+                        <div class="tx-amount text-emerald">+ ₹45.00</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Modal (Vault) -->
+    <div class="modal-overlay" id="qr-modal">
+        <div class="modal-content scale-in">
+            <div class="modal-header">
+                <h3>Receive Offline Funds</h3>
+                <button class="modal-close" id="close-qr-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body align-center">
+                <p class="modal-subtitle">Show this QR code to the sender to initiate a Wi-Fi Direct payment
+                    transfer.</p>
+                <div class="qr-container">
+                    <i class="fa-solid fa-qrcode"></i>
+                </div>
+                <p class="qr-address">addr: aether-9f8a-2b1c</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Settings Drawer (Side Menu) -->
+    <div class="drawer-overlay" id="settings-drawer">
+        <div class="drawer-content slide-right">
+            <div class="drawer-header">
+                <div class="user-profile-large">
+                    <div class="chat-avatar bg-gradient-2" style="width: 50px; height: 50px; font-size: 18px;">
+                        U
+                    </div>
+                    <div>
+                        <h2>Unknown User</h2>
+                        <span><i class="fa-solid fa-fingerprint text-emerald"></i> Node Configured</span>
+                    </div>
+                </div>
+                <button class="drawer-close" id="close-menu-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="drawer-menu">
+                <div class="menu-item drawer-action">
+                    <div class="menu-icon-bg"><i class="fa-solid fa-key"></i></div>
+                    <div class="menu-text">
+                        <h3>Manage Cryptographic Keys</h3>
+                        <p>Rotate or backup your RSA keys</p>
+                    </div>
+                </div>
+                <div class="menu-item drawer-action">
+                    <div class="menu-icon-bg"><i class="fa-solid fa-database"></i></div>
+                    <div class="menu-text">
+                        <h3>Local Network Buffer</h3>
+                        <p>Clear stored epidemic messages</p>
+                    </div>
+                </div>
+                <div class="menu-item drawer-action">
+                    <div class="menu-icon-bg"><i class="fa-solid fa-wifi"></i></div>
+                    <div class="menu-text">
+                        <h3>Wi-Fi Direct Config</h3>
+                        <p>Adjust handshake thresholds</p>
+                    </div>
+                </div>
+                <div class="menu-item drawer-action" id="theme-toggle-btn">
+                    <div class="menu-icon-bg" id="theme-icon"><i class="fa-solid fa-moon"></i></div>
+                    <div class="menu-text" style="flex: 1;">
+                        <h3 id="theme-text">Dark Mode</h3>
+                        <p>Toggle interface theme</p>
+                    </div>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="theme-switch" checked>
+                        <label for="theme-switch"></label>
+                    </div>
+                </div>
+                <div class="menu-item drawer-action text-danger mt-4">
+                    <div class="menu-icon-bg danger-bg"><i class="fa-solid fa-power-off"></i></div>
+                    <div class="menu-text">
+                        <h3 class="text-danger">Kill Service</h3>
+                        <p>Stop all background operations</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawer-footer">
+                <p>AetherNet v1.1.0 (Build 43)</p>
+                <p><i class="fa-brands fa-github"></i> Open Source Mesh</p>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+
+    <!-- AetherNet Backend Integration (api-client.js must come before script.js) -->
+    <script src="api-client.js"></script>
+    <!-- Real BLE Bluetooth Scanner (Web Bluetooth API) -->
+    <script src="ble-client.js"></script>
+    <!-- Real ₹ INR Bank Wallet (offline-first, GPay-style) -->
+    <script src="bank-wallet-ui.js"></script>
+    <!-- AetherPay — Custom Offline UPI Payment System -->
+    <script src="aetherpay-ui.js"></script>
+    <!-- P2P WebRTC Offline Mesh + Razorpay UPI Payments -->
+    <script src="p2p-client.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
